@@ -13,7 +13,14 @@ import java.util.Set;
  */
 public class IsUnique {
 
+    public static final int MAX_NUMBER_OF_CHARS = 128;
+
     public boolean isUnique(String s) {
+
+        if (s.length() > MAX_NUMBER_OF_CHARS) {
+            return false;
+        }
+
         Set<Character> elements = new HashSet<>();
 
         for (var c : s.toCharArray()) {
