@@ -25,15 +25,13 @@ public class TwoSum {
         Map<Integer, Integer> numToIndex = new HashMap<>();
 
         for (var i = 0; i < nums.length; i++) {
-            numToIndex.put(nums[i], i);
-        }
-
-        for (var i = 0; i < nums.length; i++) {
             var diff = target - nums[i];
 
             if (numToIndex.containsKey(diff)) {
-                return new int[]{i, numToIndex.get(diff)};
+                return new int[]{numToIndex.get(diff), i};
             }
+
+            numToIndex.put(nums[i], i);
         }
 
         return null;
