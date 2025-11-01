@@ -35,8 +35,6 @@ public class ZeroMatrix {
             }
         }
 
-
-
         for (var row : cellHasZero.keySet()) {
             for (int column = 0; column < matrix[row].length; column++) {
                 matrix[row][column] = 0;
