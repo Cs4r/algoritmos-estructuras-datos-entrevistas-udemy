@@ -1,6 +1,10 @@
 package com.danielblanco.algoritmosestructuras.arraysstringshashtables._04_zero_matrix;
 
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
 /*
  * Dada una matriz, escribe un algoritmo para establecer ceros en la fila F y columna C si existe un
  * 0 en la celda F:C
@@ -18,7 +22,29 @@ package com.danielblanco.algoritmosestructuras.arraysstringshashtables._04_zero_
  */
 public class ZeroMatrix {
 
-  public void zeroMatrix(int[][] matrix) {
-    throw new UnsupportedOperationException("Not implemented yet");
-  }
+    public void zeroMatrix(int[][] matrix) {
+
+        Map<Integer, Integer> cellHasZero = new HashMap<>();
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (matrix[i][j] == 0) {
+                    cellHasZero.put(i, j);
+                }
+            }
+        }
+
+        for (var row : cellHasZero.keySet()) {
+            for (int column = 0; column < matrix[row].length; column++) {
+                matrix[row][column] = 0;
+            }
+        }
+
+        for (var column : new HashSet<>(cellHasZero.values())) {
+            for (int row = 0; row < matrix.length; row++) {
+                matrix[row][column] = 0;
+            }
+        }
+
+    }
 }
