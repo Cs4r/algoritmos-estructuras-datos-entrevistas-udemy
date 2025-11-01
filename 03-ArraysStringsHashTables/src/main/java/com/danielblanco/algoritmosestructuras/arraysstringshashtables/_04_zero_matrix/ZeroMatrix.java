@@ -26,13 +26,16 @@ public class ZeroMatrix {
 
         Map<Integer, Integer> cellHasZero = new HashMap<>();
 
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix.length; j++) {
-                if (matrix[i][j] == 0) {
-                    cellHasZero.put(i, j);
+        for (int col = 0; col < matrix[0].length; col++) {
+            for (int row = 0; row < matrix.length; row++) {
+                if (matrix[row][col] == 0) {
+                    cellHasZero.put(row, col);
+                    break;
                 }
             }
         }
+
+
 
         for (var row : cellHasZero.keySet()) {
             for (int column = 0; column < matrix[row].length; column++) {
