@@ -13,45 +13,30 @@ import java.util.*;
 public class GroupAnagrams {
 
     public List<List<String>> groupAnagrams(String[] words) {
-        Map<Map<Character, Integer>, List<String>> freqToWords = new HashMap<>();
+        Map<String, List<String>> anagramsHashToWords = new HashMap<>();
 
-        for (int i = 0; i < words.length; i++) {
-            String word = words[i];
-            Map<Character, Integer> frequencies = toFrequencies(word);
+        for (String word : words) {
+            String hash = anagramHash(word);
 
-            if (freqToWords.containsKey(frequencies)) {
-                freqToWords.get(frequencies).add(word);
-            } else {
-                List<String> list = new ArrayList<>();
-                list.add(word);
-                freqToWords.put(frequencies, list);
+            if (!anagramsHashToWords.containsKey(hash)) {
+                anagramsHashToWords.put(hash, new ArrayList<>());
             }
+
+            anagramsHashToWords.get(hash).add(word);
         }
 
-        List<List<String>> output = new ArrayList<>();
-
-        for (var entry : freqToWords.entrySet()) {
-            output.add(entry.getValue());
-        }
-
-        return output;
+        return new ArrayList<>(anagramsHashToWords.values());
     }
 
 
-    private Map<Character, Integer> toFrequencies(String word) {
-        Map<Character, Integer> frequencies = new HashMap<>();
+    private String anagramHash(String word) {
+        int[] letterCount = new int[26];
 
-        for (int i = 0; i < word.length(); i++) {
-            char letter = word.charAt(i);
-
-            if (frequencies.containsKey(letter)) {
-                frequencies.put(letter, frequencies.get(letter) + 1);
-            } else {
-                frequencies.put(letter, 1);
-            }
+        for (var letter : word.toCharArray()) {
+            letterCount[letter - 'a']++;
         }
 
-        return frequencies;
+        return Arrays.toString(letterCount);
     }
 
 }
